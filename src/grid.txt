@@ -1,0 +1,36 @@
+.grid-overlay {
+  background-image: url('./your-image-path.jpg'); /* Path to your background image */
+  background-size: cover;
+  background-position: center;
+  height: 100vh; /* Full viewport height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 columns */
+  grid-template-rows: repeat(3, 1fr); /* 3 rows */
+  gap: 10px;
+  width: 80%;
+  height: 80%;
+}
+
+.grid-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  color: #fff; /* White text */
+  font-size: 1.5rem;
+  text-align: center;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.grid-item.large {
+  grid-column: span 2; /* Span two columns */
+  grid-row: span 2; /* Span two rows */
+  font-size: 2rem; /* Larger text */
+}

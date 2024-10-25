@@ -1,23 +1,24 @@
-import logo from './logo.svg';
 import './App.css';
+import Banner from './Components/Banner';
+import Footer from './Components/Footer';
+import GetInTouch from './Components/GetInTouch';
+import GlobalReach from './Components/GlobalReach';
+import GridOverlay from './Components/GridOverlay';
+import Header from './Components/Header';
+import Specialize from './Components/Specialize';
+import WhyChooseOlygers from './Components/WhyChooseOlygers';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+     <Header/>
+     <Banner/>
+     <GlobalReach/>
+     <WhyChooseOlygers/>
+     <GetInTouch/>
+     <GridOverlay/>
+     <Specialize/>
+     <Footer/>
     </div>
   );
 }
