@@ -1,12 +1,54 @@
-import React from 'react';
+import React, { useState } from 'react';
 import latinAmericaImg from '../Assets/Latin.png';
 import southAsiaImg from '../Assets/Asia.png';
 import gulfCountriesImg from '../Assets/Gulf.png';
 import usaFlagImg from '../Assets/USA.png';
 import italy from '../Assets/Italy.png';
 import spain from '../Assets/Spain.png';
+import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 
 const GlobalReach = () => {
+    const contentData = [
+        {
+            title: 'Sea Freight',
+            description: 'Our sea freight services offer cost-effective and reliable shipping for businesses of all sizes.'
+        },
+        {
+            title: 'Air Freight',
+            description: 'Fast and efficient air freight solutions to meet urgent shipping needs across the globe.'
+        },
+        {
+            title: 'Road Transport',
+            description: 'Reliable road transport services for local and regional deliveries.'
+        },
+        {
+            title: 'Warehousing',
+            description: 'Secure warehousing solutions to store and manage your goods.'
+        },
+        {
+            title: 'Customs Brokerage',
+            description: 'Assistance with customs procedures and documentation to streamline the shipping process.'
+        },
+        {
+            title: 'Supply Chain Solutions',
+            description: 'Comprehensive supply chain solutions to optimize logistics for businesses.'
+        }
+    ];
+
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    const handleNext = () => {
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % contentData.length);
+    };
+
+    const handlePrevious = () => {
+        setCurrentIndex((prevIndex) =>
+            prevIndex === 0 ? contentData.length - 1 : prevIndex - 1
+        );
+    };
+
+    const { title, description } = contentData[currentIndex];
+
     return (
         <div className='globe-main'>
             <div className="lft">
@@ -81,14 +123,16 @@ const GlobalReach = () => {
             </div>
             <div className="card">
                 <h2 className='h2'>What we specialize</h2>
-                <h3 className='h3'>1. Sea Freight</h3>
-                <p className='p'>Our sea freight services offer cost-effective and reliable shipping for businesses of all sizes.</p>
+                <h3 className='h3'>{currentIndex + 1}. {title}</h3>
+                <p className='p'>{description}</p>
                 <div className="btn">
                     <div className="lft">
-                        <p>01/<span>06</span></p>
+                        <p>{String(currentIndex + 1).padStart(2, '0')}/<span>{String(contentData.length).padStart(2, '0')}</span></p>
                     </div>
                     <div className="rht">
-                        <button> &lt; | &gt; </button>
+                        <button onClick={handlePrevious}> <IoIosArrowBack /> </button>
+                        |
+                        <button onClick={handleNext}> <IoIosArrowForward /> </button>
                     </div>
                 </div>
             </div>
