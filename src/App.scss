@@ -11,14 +11,7 @@ button {
 
 .App {
   width: 100%;
-  background: white;
   max-width: 1800px;
-}
-
-@media (prefers-color-scheme: dark) {
-  body {
-    background: #121212;
-  }
 }
 
 @media screen and (min-width:1800px) {
