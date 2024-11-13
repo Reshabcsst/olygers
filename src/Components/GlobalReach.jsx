@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import latinAmericaImg from '../Assets/Latin.png';
 import southAsiaImg from '../Assets/Asia.png';
 import gulfCountriesImg from '../Assets/Gulf.png';
@@ -36,23 +36,42 @@ const GlobalReach = () => {
     ];
 
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [animate, setAnimate] = useState(false);
 
     const handleNext = () => {
+        setAnimate(true);
         setCurrentIndex((prevIndex) => (prevIndex + 1) % contentData.length);
     };
 
     const handlePrevious = () => {
+        setAnimate(true);
         setCurrentIndex((prevIndex) =>
             prevIndex === 0 ? contentData.length - 1 : prevIndex - 1
         );
     };
+
+
+    // Auto-slide effect using useEffect
+    useEffect(() => {
+        const interval = setInterval(() => {
+            handleNext();
+        }, 3500);
+
+        return () => clearInterval(interval);
+    }, []);
+
+
+    useEffect(() => {
+        const timeout = setTimeout(() => setAnimate(false), 500);
+        return () => clearTimeout(timeout);
+    }, [currentIndex]);
 
     const { title, description } = contentData[currentIndex];
 
     return (
         <div className='globe-main'>
             <div className="lft">
-                <div className="hd">
+                <div className="hd" data-aos="fade-right">
                     <h2>Global Reach</h2>
                     <p>With a presence across multiple countries, we provide seamless
                         logistics solutions tailored to your business needs.</p>
@@ -121,10 +140,10 @@ const GlobalReach = () => {
                     </div>
                 </div>
             </div>
-            <div className="card">
+            <div className="card" data-aos="fade-up">
                 <h2 className='h2'>What we specialize</h2>
-                <h3 className='h3'>{currentIndex + 1}. {title}</h3>
-                <p className='p'>{description}</p>
+                <h3 className={`h3 ${animate ? 'slide-up' : ''}`}>{currentIndex + 1}. {title}</h3>
+                <p className={`p ${animate ? 'slide-up' : ''}`} >{description}</p>
                 <div className="btn">
                     <div className="lft">
                         <p>{String(currentIndex + 1).padStart(2, '0')}/<span>{String(contentData.length).padStart(2, '0')}</span></p>

@@ -103,11 +103,11 @@ const TestimonialSlider = () => {
             key={index}
             className={`dot ${currentSlide === index ? "active" : ""}`}
             onClick={() => {
-              setFade(false); // Start fade out
+              setFade(false);
               setTimeout(() => {
                 setCurrentSlide(index);
-                setFade(true); // Start fade in
-              }, 500); // Match this duration to the CSS transition
+                setFade(true);
+              }, 500);
             }}
           ></span>
         ))}

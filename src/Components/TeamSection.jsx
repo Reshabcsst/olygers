@@ -34,7 +34,7 @@ const TeamSection = () => {
   // Scroll to the right
   const scrollRight = () => {
     ref.current.scrollBy({
-      left: 350, 
+      left: 350,
       behavior: "smooth"
     });
   };
@@ -44,7 +44,7 @@ const TeamSection = () => {
       <div className="hd">
         <div className="team-header">
           <button className="our-team-btn">Our team</button>
-          <h2>Meet Our Expert Logistics team</h2>
+          <h2 data-aos="fade-right" data-aos-duration="400">Meet Our Expert Logistics team</h2>
         </div>
         <div className="team-arrows">
           <button onClick={scrollLeft} className="arrow-left">&larr;</button>
@@ -52,7 +52,14 @@ const TeamSection = () => {
         </div>
       </div>
 
-      <div {...events} ref={ref} className="team-cards-container">
+      <div
+        {...events}
+        ref={ref}
+        className="team-cards-container"
+        data-aos="fade-left"
+        data-aos-offset="300"
+        data-aos-duration="600"
+      >
         {teamMembers.map((member, index) => (
           <div key={index} style={{ backgroundImage: `url(${member.image})` }} className="team-card">
             <div className="team-info">

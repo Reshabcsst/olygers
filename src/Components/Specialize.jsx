@@ -30,7 +30,7 @@ const Specialize = () => {
 
   return (
     <div className="specialize-container">
-      <div className="specialize-left">
+      <div className="specialize-left" data-aos="fade-right">
         <img src={head} alt="heading" />
         <h2>We Specialize in</h2>
         <p>

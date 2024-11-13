@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import img from '../Assets/ls.png';
-import img1 from '../Assets/fi.png';
-import img2 from '../Assets/si.png';
+import img1 from '../Assets/ev1.jpg';
+import img2 from '../Assets/ev2.jpg';
+import l1 from '../Assets/logo1.png';
+import l2 from '../Assets/logo2.jpg';
+import l4 from '../Assets/logo4.avif';
 
 const slides = [
     {
@@ -24,6 +27,27 @@ const slides = [
     }
 ];
 
+const Logos = [
+    {
+        img: l1
+    },
+    {
+        img: l2
+    },
+    {
+        img: l4
+    },
+    {
+        img: l1
+    },
+    {
+        img: l2
+    },
+    {
+        img: l4
+    }
+]
+
 const OurEvents = () => {
     const [currentSlide, setCurrentSlide] = useState(0);
     const [isFading, setIsFading] = useState(false);
@@ -40,12 +64,50 @@ const OurEvents = () => {
                     return prevSlide === 0 ? slides.length - 1 : prevSlide - 1;
                 }
             });
-            setIsFading(false); // Start fade-in effect
-        }, 300); // Fade-out duration
+            setIsFading(false);
+        }, 300);
     };
+
+    // Auto slide for Above section after 5 seconds if no manual change
+    useEffect(() => {
+        const autoSlideTimer = setInterval(() => {
+            changeSlide('next');
+        }, 5000);
+
+        return () => clearInterval(autoSlideTimer);
+    }, []);
+
+
+
+
+
+    // Auto Scroll
+    useEffect(() => {
+        const scrollers = document.querySelectorAll(".scroller");
+
+        if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            scrollers.forEach((scroller) => {
+                scroller.setAttribute("data-animated", "true");
+
+                const scrollerInner = scroller.querySelector(".scroller__inner");
+                const scrollerContent = Array.from(scrollerInner.children);
+
+                scrollerContent.forEach((item) => {
+                    const duplicatedItem = item.cloneNode(true);
+                    duplicatedItem.setAttribute("aria-hidden", true);
+                    scrollerInner.appendChild(duplicatedItem);
+                });
+            });
+        }
+    }, []);
     return (
         <>
-            <div className="events">
+            <div
+                className="events"
+                data-aos="fade-up"
+                data-aos-offset="0"
+                data-aos-anchor-placement="center-center"
+            >
                 <div className="lft">
                     <button className="fb">Our Event</button>
                     <p className={`ft ${isFading ? 'fade' : ''}`}>{slides[currentSlide].title}</p>
@@ -62,10 +124,15 @@ const OurEvents = () => {
                     className="rht"
                 ></div>
             </div>
-            <div className="lwr">
-                <div className="box"><p>MxGTL</p></div>
-                <div className="box"><p>MxGTL</p></div>
-                <div className="box"><p>MxGTL</p></div>
+
+            <div className="lwr scroller" data-speed="mid">
+                <div className="scroller__inner">
+                    {Logos.map((item, index) => (
+                        <div key={index} className="box">
+                            <img src={item.img} alt={`Logo ${index + 1}`} />
+                        </div>
+                    ))}
+                </div>
             </div>
         </>
     );
